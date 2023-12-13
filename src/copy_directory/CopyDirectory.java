@@ -74,7 +74,7 @@ import javax.swing.JOptionPane;
  *          Finally is showed in a
  *          {@link JOptionPane#showConfirmDialog(java.awt.Component, Object, String, int)}
  *          a message notifying the finish of the copy from {@code copyPath} to
- *          {@code pasteString}
+ *          {@code pasteString}.
  *          </p>
  * 
  * @author joaoGHF
