@@ -121,6 +121,7 @@ public class CopyDirectory {
 
         } catch (InputMismatchException e1) {
             JOptionPane.showMessageDialog(null, e1.getMessage(), "Warning! Error...", JOptionPane.WARNING_MESSAGE);
+            System.exit(-1);
         }
 
         StringBuilder sbLog = new StringBuilder();
