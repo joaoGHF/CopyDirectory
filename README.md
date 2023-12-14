@@ -2,7 +2,40 @@
 
 <p>The <a href="src/copy_directory/CopyDirectory.java">CopyDirectory</a> is the main class of this program. This program question the user in your init with two <code>JOptionPane#showInputDialog(java.awt.Component, Object, String, int)</code> that resquest the values of the <code>String copyString</code> and <code>String pasteString</code> and his respectives paths (<code>copyPath</code> and <code>pastePath</code>). Then it will create a <code>StringBuilder</code> named <code>sbLog</code> that receive all logs of this copy, like the init time, all files copied and pasted and, the end time.</p>
 
+<table>
+  <tr>
+    <td><img src="images/copyPanel.png" alt="Copy Panel" width="300"/></td>
+    <td>
+      <p>This show the <code>JOptionPane</code> that receives the path to copy.</p>
+    </td>
+  </tr>
+  
+  <tr>
+    <td><img src="images/pastePanel.png" alt="Paste Panel" width="300"/></td>
+    <td>
+      <p>This show the <code>JOptionPane</code> that receives the path to paste.</p>
+    </td>
+  </tr>
+</table>
+
 <p>To prevent an infinite recursion error, caused when the <code>pastePath</code> is inside the <code>copyPath</code> this program then checks for the existence of this possible error in a <code>try block</code>. First is stored in two <code>String</code> objects the absolute path of <code>copyPath</code> and <code>pastePath</code>. Then verify if <code>absPastePath</code> contains <code>absCopyPath</code> with the method <code>String#contains(CharSequence)</code>. If it is true, is throwed a new <code>InputMismatchException#InputMismatchException(String)</code>, that receive in the <code>String</code> parameter a detail message that explains the error. Then, in the <code>catch</code> block, is showed a <code>JOptionPane#showMessageDialog(java.awt.Component, Object, String, int)</code> that warns of the error and terminate the program with a <code>System#exit(int)</code> as parameter <code>-1</code> to indicates unsuccessful termination with Exception.</p>
+
+<table>
+  <tr>
+    <td><img src="images/RecursivityBug.png" alt="Recursivity Bug Example" width="800"/></td>
+    <td>
+      <p>This is a possible case where is noted a infinite loop caused by recursivity.</p>
+    </td>
+  </tr>
+  
+  <tr>
+    <td><img src="images/RecursivityBugPrevention.png" alt="Recursivity Bug Prevention" width="800"/></td>
+    <td>
+      <p>This image shows a JOptionPane that explains a error and his path of copy and path, it's after exit the program with <code>System#exit(-1)</code>.</p>
+    </td>
+  </tr>
+</table>
+
 
 <p>With the <code>Files#walk(Path, java.nio.file.FileVisitOption...)</code> that returs a <code>Stream</code> of <code>Path</code>, this program will try traverse this <code>Stream&#60;Path&#62;</code> with a <code>Stream#forEach(Consumer)</code>. As this <code>Consumer</code> is passed a <code>lambda</code> with the parameter <code>p</code> of type <code>Path</code> and int the body the process of copy and paste.</p>
 
