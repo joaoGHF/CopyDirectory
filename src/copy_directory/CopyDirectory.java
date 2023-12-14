@@ -17,71 +17,66 @@ import javax.swing.JOptionPane;
  * </h1>
  * 
  * 
- *          <p>
- *          The {@code CopyDirectory} is the main class of this program. This
- *          program
- *          question the user in your init with two
- *          {@link JOptionPane#showInputDialog(java.awt.Component, Object, String, int)}
- *          that resquest the values of the {@code copyString} and
- *          {@code pasteString}
- *          and his
- *          respectives paths ({@code copyPath} and {@code pastePath}). Then it
- *          will
- *          create a {@link StringBuilder} named {@code sbLog} that receive all
- *          logs of
- *          this copy, like the init time, all files copied and pasted and, the
- *          end time.
- *          </p>
+ * <p>
+ * The {@code CopyDirectory} is the main class of this program. This program
+ * question the user in your init with two
+ * {@link JOptionPane#showInputDialog(java.awt.Component, Object, String, int)}
+ * that resquest the values of the {@code copyString} and {@code pasteString}
+ * and his respectives paths ({@code copyPath} and {@code pastePath}). Then it
+ * will create a {@link StringBuilder} named {@code sbLog} that receive all logs
+ * of this copy, like the init time, all files copied and pasted and, the end
+ * time.
+ * </p>
  * 
- *          <p>
- *          With the {@link Files#walk(Path, java.nio.file.FileVisitOption...)}
- *          that
- *          returs a {@link Stream} of {@link Path}, this program will try
- *          traverse this
- *          {@code Stream<Path>} with a {@link Stream#forEach(Consumer)}. As
- *          this
- *          {@link Consumer} is passed a {@code lambda} with the parameter
- *          {@code p} of
- *          type {@link Path} and int the body the process of copy and paste.
- *          </p>
+ * <p>
+ * With the {@link Files#walk(Path, java.nio.file.FileVisitOption...)} that
+ * returs a {@link Stream} of {@link Path}, this program will try traverse this
+ * {@code Stream<Path>} with a {@link Stream#forEach(Consumer)}. As this
+ * {@link Consumer} is passed a {@code lambda} with the parameter {@code p} of
+ * type {@link Path} and int the body the process of copy and paste.
+ * </p>
  * 
- *          <p>
- *          Into the body of the consumer, the program will try create a
- *          {@link Path}
- *          named {@code q} that receive the
- *          {@code pastePath.resolve(copyPath.relativize(p))}. Then print what
- *          file is
- *          being copied and what file is being pasted. Next, test with the
- *          {@link Files#isDirectory(Path, java.nio.file.LinkOption...)} if
- *          {@code p}
- *          (the path being copied) is a directory, if the test is true, is
- *          created the
- *          directory {@code q} (the path being pasted) with the method
- *          {@link Files#createDirectory(Path, java.nio.file.attribute.FileAttribute...)};
- *          else the file on the path {@code p} is copied to the path {@code q}
- *          with the
- *          method {@link Files#copy(Path, Path, java.nio.file.CopyOption...)}.
- *          </p>
+ * <p>
+ * Into the body of the consumer, the program will try create a {@link Path}
+ * named {@code q} that receive the
+ * {@code pastePath.resolve(copyPath.relativize(p))}. Then print what file is
+ * being copied and what file is being pasted. Next, test with the
+ * {@link Files#isDirectory(Path, java.nio.file.LinkOption...)} if {@code p}
+ * (the path being copied) is a directory, if the test is true, is created the
+ * directory {@code q} (the path being pasted) with the method
+ * {@link Files#createDirectory(Path, java.nio.file.attribute.FileAttribute...)};
+ * else the file on the path {@code p} is copied to the path {@code q} with the
+ * method {@link Files#copy(Path, Path, java.nio.file.CopyOption...)}.
+ * </p>
  * 
- *          <p>
- *          After the scope of the {@code try} that contains the
- *          {@link Files#walk(Path, java.nio.file.FileVisitOption...)} is
- *          terminated and
- *          processed the log, finally it is writed.
- *          </p>
+ * <p>
+ * After the scope of the {@code try} that contains the
+ * {@link Files#walk(Path, java.nio.file.FileVisitOption...)} is terminated and
+ * processed the log, finally it is writed.
+ * </p>
  * 
- *          <p>
- *          Finally is showed in a
- *          {@link JOptionPane#showConfirmDialog(java.awt.Component, Object, String, int)}
- *          a message notifying the finish of the copy from {@code copyPath} to
- *          {@code pasteString}.
- *          </p>
+ * <p>
+ * Finally is showed in a
+ * {@link JOptionPane#showConfirmDialog(java.awt.Component, Object, String, int)}
+ * a message notifying the finish of the copy from {@code copyPath} to
+ * {@code pasteString}.
+ * </p>
+ * 
+ * 
+ * 
+ * @implSpec
+ *           <h2>
+ *           Warning:
+ *           </h2>
+ * 
+ *           <p>
+ *           A bug occurs when is called from copy one directory to another
+ *           inside the copied directory, causing recursivity. In the model:
+ *           copy {@code path/src/} to {@code path/src/test}
+ *           </p>
  * 
  * @author joaoGHF
- * @since 1.0
  * @version 1.0, 13/12/2023
- * 
- * @
  */
 public class CopyDirectory {
     public static void main(String[] args) {
