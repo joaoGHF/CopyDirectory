@@ -6,11 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
-
+// TODO: add in the javadoc of the prevent to recursivity
 /**
  * <h1>
  * CopyDirectory
@@ -87,6 +88,23 @@ public class CopyDirectory {
         String pasteString = JOptionPane.showInputDialog(null, "Enter the diretory to receive the copy (the target):",
                 "CopyDirectory", JOptionPane.QUESTION_MESSAGE);
         Path pastePath = Path.of(pasteString);
+
+        try {
+            String absCopyPath = copyPath.toAbsolutePath().toString();
+            String absPastePath = pastePath.toAbsolutePath().toString();
+
+            if (absPastePath.contains(absCopyPath)) {
+                throw new InputMismatchException(
+                        String.format(
+                                "Endless recusivity caused because%n" + 
+                                "the paste directory '%s'%n"+
+                                "is inside the copy directory '%s'",
+                                absPastePath, absCopyPath));
+            }
+
+        } catch (InputMismatchException e1) {
+            JOptionPane.showMessageDialog(null, e1.getMessage(), "Warning! Error...", JOptionPane.WARNING_MESSAGE);
+        }
 
         StringBuilder sbLog = new StringBuilder();
         sbLog.append(String.format("InitTime=%s%n", LocalDateTime.now()));
