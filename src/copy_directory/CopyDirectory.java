@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
-// TODO: add in the javadoc of the prevent to recursivity
+
 /**
  * <h1>
  * CopyDirectory
@@ -27,6 +27,23 @@ import javax.swing.JOptionPane;
  * will create a {@link StringBuilder} named {@code sbLog} that receive all logs
  * of this copy, like the init time, all files copied and pasted and, the end
  * time.
+ * </p>
+ * 
+ * <p>
+ * To prevent an infinite recursion error, caused when the {@code pastePath} is
+ * inside the {@code copyPath}, this program then checks for the existence of
+ * this possible error in a {@code try block}. First is stored in two
+ * {@link String} objects the absolute path of {@code copyPath} and
+ * {@code pastePath}. Then verify if {@code absPastePath} contains
+ * {@code absCopyPath} with the method {@link String#contains(CharSequence)}.
+ * If it is true, is throwed a new
+ * {@link InputMismatchException#InputMismatchException(String)}, that receive
+ * in the {@link String} parameter a detail message that explains the error.
+ * Then, in the {@code catch} block, is showed a
+ * {@link JOptionPane#showMessageDialog(java.awt.Component, Object, String, int)}
+ * that warns of the error and terminate the program with a
+ * {@link System#exit(int)} as parameter {@code -1} to indicates unsuccessful
+ * termination with Exception.
  * </p>
  * 
  * <p>
@@ -96,9 +113,9 @@ public class CopyDirectory {
             if (absPastePath.contains(absCopyPath)) {
                 throw new InputMismatchException(
                         String.format(
-                                "Endless recusivity caused because%n" + 
-                                "the paste directory '%s'%n"+
-                                "is inside the copy directory '%s'",
+                                "Endless recusivity caused because%n" +
+                                        "the paste directory '%s'%n" +
+                                        "is inside the copy directory '%s'",
                                 absPastePath, absCopyPath));
             }
 
