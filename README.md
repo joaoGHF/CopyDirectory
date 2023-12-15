@@ -44,3 +44,16 @@
 <p>After the scope of the <code>try</code> that contains the <code>Files#walk(Path, java.nio.file.FileVisitOption...)</code> is terminated and processed the log, finally it is writed.</p>
   
 <p>Finally is showed in a <code>JOptionPane#showConfirmDialog(java.awt.Component, Object, String, int)</code> a message notifying the finish of the copy from <code>copyPath</code> to <code>pasteString</code>.</p>
+
+<h2>One sample of Log</h2>
+<p>The following text block is a sample of logs storeds in the <a href="src/logs/export.log">export.log</a> file:</p>
+
+```$$
+InitTime=2023-12-15T16:30:20.847093500
+CreateDirectory=>C:\Users\Reinaldo\Documents\Minhas paletas\doc João\Hello\01
+CopiedFile=>C:\Users\Reinaldo\Documents\Minhas paletas\doc João\Teste\01\arq.txt->C:\Users\Reinaldo\Documents\Minhas paletas\doc João\Hello\01\arq.txt
+CreateDirectory=>C:\Users\Reinaldo\Documents\Minhas paletas\doc João\Hello\01\PASTE HERE
+CopiedFile=>C:\Users\Reinaldo\Documents\Minhas paletas\doc João\Teste\File.txt->C:\Users\Reinaldo\Documents\Minhas paletas\doc João\Hello\File.txt
+EndTime=2023-12-15T16:30:20.956293700
+----
+```
